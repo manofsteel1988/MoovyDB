@@ -9,12 +9,14 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
   trendingMovies: any;
   theatreMovies: any;
+  popularMovies: any;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getTrendingMovies();
     this.getTheatreMovies();
+    this.getPopularMovies();
   }
 
   getTrendingMovies() {
@@ -30,6 +32,14 @@ export class HomeComponent implements OnInit {
       .get('http://localhost:4200/assets/data/theatre-movies.json')
       .subscribe((movie) => {
         this.theatreMovies = movie;
+      });
+  }
+
+  getPopularMovies() {
+    this.http
+      .get('http://localhost:4200/assets/data/popular-movies.json')
+      .subscribe((movie) => {
+        this.popularMovies = movie;
       });
   }
 }
